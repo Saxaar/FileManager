@@ -7,10 +7,28 @@
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
-<VBox fx:controller="com.filemanager.java.manager.Controller" xmlns:fx="http://javafx.com/fxml" alignment="center">
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<VBox fx:controller="com.filemanager.java.manager.Controllers.Controller" xmlns:fx="http://javafx.com/fxml" alignment="center">
     <MenuBar>
-        <Menu>
+        <Menu text="file">
             <MenuItem text="Exit" />
         </Menu>
     </MenuBar>
+    <HBox>
+        <ComboBox />
+            <TextField HBox.hgrow="ALWAYS" editable="false" />
+        <Button text="Up"/>
+    </HBox>
+    <TableView fx:id="filesTable" VBox.vgrow="ALWAYS"/>
+    <HBox spacing="5">
+        <Button text="Copy" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button text="New File" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button text="Move to" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button text="Delete" maxWidth="Infinity" HBox.hgrow="ALWAYS"/>
+        <Button text="Exit" maxWidth="Infinity" HBox.hgrow="ALWAYS" onAction="#buttonExitAction"/>
+
+    </HBox>
 </VBox>
