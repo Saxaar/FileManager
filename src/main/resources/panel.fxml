@@ -14,10 +14,13 @@
 <VBox fx:controller="com.filemanager.java.manager.Controllers.PanelController" xmlns:fx="http://javafx.com/fxml" alignment="center">
 
     <HBox>
-        <ComboBox fx:id="disksBox" />
+        <ComboBox fx:id="disksBox"  onAction="#selectDiskAction"/>
             <TextField fx:id="pathField" HBox.hgrow="ALWAYS" editable="false" />
         <Button text="Up" onAction="#btnPathUpAction"/>
     </HBox>
     <TableView fx:id="filesTable" VBox.vgrow="ALWAYS"/>
 
+    <properties>
+     <controller><fx:reference source = "controller"/></controller>
+    </properties>
 </VBox>

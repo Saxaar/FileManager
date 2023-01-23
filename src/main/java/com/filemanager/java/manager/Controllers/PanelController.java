@@ -4,9 +4,11 @@ import com.filemanager.java.manager.model.FileInfo;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -81,9 +83,32 @@ public class PanelController implements Initializable {
         }
         disksBox.getSelectionModel().select(0);
 
+        filesTable.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                if(mouseEvent.getClickCount() == 2){
+                    Path path = Paths.get(pathField.getText())
+                            .resolve(filesTable.getSelectionModel().getSelectedItem().getName());
+                    if (Files.isDirectory(path)) {
+                        updateList(path);
+                }
+
+            }
+            }
+        });
+
         updateList(Paths.get("."));
 
+    }
+    public String getSelectedFileName(){
+        if(!filesTable.isFocused()){
+            return null;
+        }
+        return filesTable.getSelectionModel().getSelectedItem().getName();
+    }
 
+    public String getCurrentPath(){
+        return pathField.getText();
     }
 
 
@@ -106,5 +131,10 @@ public class PanelController implements Initializable {
             updateList(upperPath);
         }
 
+    }
+
+    public void selectDiskAction(ActionEvent actionEvent) {
+        ComboBox<String> event =(ComboBox<String>) actionEvent.getSource();
+        updateList(Paths.get(event.getSelectionModel().getSelectedItem()));
     }
 }
